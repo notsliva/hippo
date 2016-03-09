@@ -3,27 +3,146 @@
 <head>
 <meta charset="utf-8" />
 <title>Hippo</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *" />
 <meta name="format-detection" content="telephone=no" />
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-<link rel="stylesheet" type="text/css" href="css/index.css" />
+
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<style type="text/css">
+#dialpad {
+	display: none;
+	width: 200px;
+	text-align: center;
+	background: #cdf;
+}
+#dialpad input {
+	width: 80%;
+}
+#pad {
+	height: 240px;
+	margin: 1em 0 1em 0.8em;
+}
+#pad .btn {
+	float: left;
+	margin: 0 0.5em 0.5em 0;
+	width: 55px;
+	height: 55px;
+	line-height: 55px;
+	border-radius: 10px;
+	background: #abc;
+}
+#pad .btn:active {
+	background: #ccc;
+}
+</style>
 </head>
 
 <body>
+<audio src="res/btn.mp3" preload></audio>
 <div id="wrapper">
-	<div id="box">
+	<div id="welcome">
 		<h1>Welcome to HippoApp</h1>
 		<h3>Please wait...</h3>
 	</div>
-	<form action="" id="formSend">
-		<input type="text" id="txtDomain" value="ya.ru" />
-		<input type="submit" value="check domain" />
-	</form>
-	<div id="result"></div>
+	<div id="dialpad">
+		<div><input type="number" id="txtPhone" /></div>
+		<div id="pad">
+			<div class="btn">1</div>
+			<div class="btn">2</div>
+			<div class="btn">3</div>
+			<div class="btn">4</div>
+			<div class="btn">5</div>
+			<div class="btn">6</div>
+			<div class="btn">7</div>
+			<div class="btn">8</div>
+			<div class="btn">9</div>
+			<div class="btn clear">clear</div>
+			<div class="btn">0</div>
+			<div class="btn del">del</div>
+		</div>
+		<div><input type="button" id="btnAddContact" value="add to phone book" /></div>
+	</div>
 </div>
 
 <script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/trim.js"></script>
+<script type="text/javascript">
+var txtPhone, pad, urlMP3, btnAddContact;
+document.addEventListener('deviceready', onDeviceReady, false);
+
+function onDeviceReady(e) {
+	document.getElementById('welcome').style.display = 'none';
+	document.getElementById('dialpad').style.display = 'block';
+	//
+	txtPhone = document.getElementById('txtPhone');
+	pad = document.getElementById('pad');
+	btnAddContact = document.getElementById('btnAddContact');
+	//
+	urlMP3 = getMediaURL('res/btn.mp3');
+	pad.addEventListener('touchend', onPadClick, false);
+	btnAddContact.addEventListener('touchend', onAddClick, false);
+}
+
+function onPadClick(e) {
+	var self = e.target;
+	if (self.className.indexOf('btn') == -1) return;
+	
+	if (self.className.indexOf('clear') > -1) {
+		txtPhone.value = '';
+	}
+	else if (self.className.indexOf('del') > -1) {
+		var str = txtPhone.value;
+		txtPhone.value = str.substring(0, str.length - 1);
+	}
+	else {
+		var num = parseInt(self.innerHTML);
+		txtPhone.value += num;
+	}
+	
+	playSound(urlMP3);
+}
+
+function onAddClick(e) {
+	if (txtPhone.value == '') return;
+	var dspName = prompt('Enter some name', '');
+	if (!dspName || trim(dspName, ' ') == '') return;
+	var contact = navigator.contacts.create();
+	contact.displayName = dspName;
+	contact.phoneNumbers = [new ContactField('mobile', txtPhone.value, true)];
+	//
+	contact.save(
+		// success
+		function () {
+			alert("Save Success");
+		},
+		// error
+		function (err) {
+			alert("Error = " + err.code);
+		}
+	);
+}
+
+function getMediaURL(s) {
+	if (device.platform.toLowerCase() === 'android') {
+		return '/android_asset/www/' + s;
+	}
+	return s;
+}
+
+function playSound(url) {
+	var media = new Media(
+		url,
+		// success
+		function () {
+			media.release();
+		},
+		// error
+		function (err) {
+			alert('mp3 playing error');
+		}
+	);
+	media.play();
+}
+</script>
 </body>
 </html>

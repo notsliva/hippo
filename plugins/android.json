@@ -9,7 +9,20 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "net.disup.hippo"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "net.disup.hippo"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "net.disup.hippo"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "net.disup.hippo"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "net.disup.hippo"
+        }
+    }
 }

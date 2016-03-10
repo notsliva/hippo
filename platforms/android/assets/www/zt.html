@@ -1,0 +1,35 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+
+<script type="text/javascript">
+window.onload = function () {
+	var tm;
+	btn.addEventListener('mousedown', onMDown, false);
+	btn.addEventListener('mouseup', onMUp, false);
+	
+	function onMDown(e) {
+		tm = setTimeout(function () {
+			clearTimeout(tm);
+			tm = null;
+			num.value += '-1';
+		}, 1000);
+	}
+	function onMUp(e) {
+		if (tm) {
+			clearTimeout(tm);
+			tm = null;
+			num.value += '0';
+		}
+	}
+};
+</script>
+</head>
+
+<body>
+<input type="number" id="num"/>
+<button id="btn">click me</button>	
+</body>
+</html>

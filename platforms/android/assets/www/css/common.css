@@ -52,6 +52,9 @@ input {
 #wrapper {
 	padding: 1em;
 }
+#box {
+	display: none;
+}
 #welcome {
 	margin: 1em;
 }

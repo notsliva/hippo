@@ -10,7 +10,6 @@
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 <style type="text/css">
 #dialpad {
-	display: none;
 	width: 200px;
 	text-align: center;
 	background: #cdf;
@@ -56,7 +55,7 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
 	document.getElementById('welcome').style.display = 'none';
-	document.getElementById('dialpad').style.display = 'block';
+	document.getElementById('box').style.display = 'block';
 	//
 	URL_MP3 = getMediaURL('res/btn.mp3');
 	txtPhone = document.getElementById('txtPhone');
@@ -169,23 +168,25 @@ function playAudio(url) {
 		<h1>Welcome to HippoApp</h1>
 		<h3>Please wait...</h3>
 	</div>
-	<div id="dialpad">
-		<input type="tel" id="txtPhone" />
-		<div id="pad">
-			<div class="btn">1</div>
-			<div class="btn">2</div>
-			<div class="btn">3</div>
-			<div class="btn">4</div>
-			<div class="btn">5</div>
-			<div class="btn">6</div>
-			<div class="btn">7</div>
-			<div class="btn">8</div>
-			<div class="btn">9</div>
-			<div class="btn clear">clear</div>
-			<div class="btn" id="btnPlus">0/+</div>
-			<div class="btn del">del</div>
+	<div id="box">
+		<div id="dialpad">
+			<input type="tel" id="txtPhone" />
+			<div id="pad">
+				<div class="btn">1</div>
+				<div class="btn">2</div>
+				<div class="btn">3</div>
+				<div class="btn">4</div>
+				<div class="btn">5</div>
+				<div class="btn">6</div>
+				<div class="btn">7</div>
+				<div class="btn">8</div>
+				<div class="btn">9</div>
+				<div class="btn clear">clear</div>
+				<div class="btn" id="btnPlus">0/+</div>
+				<div class="btn del">del</div>
+			</div>
+			<input type="button" id="btnAdd" value="add to phone book" />
 		</div>
-		<input type="button" id="btnAdd" value="add to phone book" />
 	</div>
 </div>
 </body>

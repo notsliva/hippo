@@ -9,6 +9,7 @@ html {
 	-webkit-user-select: none;
 	font: 85% Arial, Helvetica, sans-serif;
 	line-height: 1.5em;
+	color: #000;
 	background-color: #E4E4E4;
 	background-image: linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
 	background-image: -webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
@@ -21,40 +22,85 @@ html {
 		color-stop(0.51, #E4E4E4)
 	);
 	background-attachment: fixed;
-	color: #000;
 }
 html, body {
-	width:100%;
+	width: 100%;
 	height: 100%;
 }
 h1, h2, h3 {
 	margin: 0.5em;
 	font-weight: bold;
 	text-align: center;
-	color: #4473CA;
-}
-h1 {
-	font-size: 180%;
-}
-h2 {
-	font-size: 160%;
-}
-h3 {
-	font-size: 140%;
+	color: #47f;
 }
 pre {
 	white-space: pre-wrap;
 }
 input {
-	padding: 0.5em;
 	font-size: 100%;
+	padding: 0.5em;
 }
+/* core */
 #wrapper {
-	padding: 1em;
-}
-#box {
-	display: none;
+	position: relative;
+	min-width: 240px;
+	min-height: 320px;
+	height: 100%;
+	overflow: auto; /* for bg */
 }
 #welcome {
-	margin: 1em;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 216px;
+	height: 216px;
+	margin: -109px 0 0 -109px;
+	overflow: hidden;
+	text-align: center;
+	border: solid 1px #000;
+	border-radius: 10px;
+	background: url(../img/logo.png) no-repeat 50% 50%;
+}
+#welcome h2 {
+	margin: 15px 0 0;
+	font-size: 16px;
+	color: #000;
+}
+#welcome p {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	margin-bottom: 15px;
+	font-size: 14px;
+}
+#container {
+	display: none;
+	padding: 50px 10px;
+}
+#header, #footer {
+	position: fixed;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background: #345;
+}
+#header {
+	top: 0;
+	border-bottom: 1px solid #000;
+}
+#header h1 {
+	display: inline-block; /* for centering */
+	margin: 0;
+	font-size: 20px;
+}
+#footer {
+	bottom: 0;
+	border-top: 1px solid #000;
+}
+#footer input {
+	width: 30%;
+	min-width: 100px;
+	font-size: 14px;
 }

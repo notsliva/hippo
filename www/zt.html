@@ -17,15 +17,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 // TaskName
 ///////////////////////////////////////////////////////////////////////////////
-// cordova plugin add cordova-plugin-device
-///////////////////////////////////////////////////////////////////////////////
 
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
 	document.getElementById('welcome').style.display = 'none';
-	document.getElementById('box').style.display = 'block';
-	
+	document.getElementById('container').style.display = 'block';
+	document.getElementById('btnExit').ontouchend = function () {
+		navigator.app.exitApp();
+	};
+	//
 	
 }
 </script>
@@ -34,12 +35,18 @@ function onDeviceReady() {
 <body>
 <div id="wrapper">
 	<div id="welcome">
-		<h1>Welcome to HippoApp</h1>
-		<h3>Please wait...</h3>
+		<h2>Welcome to HippoApp</h2>
+		<p>Application initialization...</p>
 	</div>
-	<div id="box">
+	<div id="container">
 		
 	</div>
+</div>
+<div id="header">
+	<h1>TaskName</h1>
+</div>
+<div id="footer">
+	<input type="button" id="btnExit" value="Exit"/>
 </div>
 </body>
 </html>

@@ -9,24 +9,72 @@
 
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 <style type="text/css">
-
+#formSend {
+	margin: 1em 0;
+	text-align: center;
+}
+#formSend input[type="text"] {
+	width: 30%;
+	min-width: 10em;
+}
+#formSend input[type="submit"] {
+	width: 10%;
+	min-width: 8em;
+}
 </style>
 
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
 ///////////////////////////////////////////////////////////////////////////////
-// TaskName
-///////////////////////////////////////////////////////////////////////////////
-// cordova plugin add cordova-plugin-device
+// WhoIs
 ///////////////////////////////////////////////////////////////////////////////
 
+var URL = 'http://whoisxmlapi.com/whoisserver/WhoisService?domainName=';
+var formSend, txtDomain, result, req;
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
 	document.getElementById('welcome').style.display = 'none';
-	document.getElementById('box').style.display = 'block';
-	
-	
+	document.getElementById('container').style.display = 'block';
+	document.getElementById('btnExit').ontouchend = function () {
+		navigator.app.exitApp();
+	};
+	//
+	formSend = document.getElementById('formSend');
+	txtDomain = document.getElementById('txtDomain');
+	result = document.getElementById('result');
+	req = new XMLHttpRequest();
+	req.addEventListener('readystatechange', onReqChange, false);
+	formSend.addEventListener('submit', onFormSubmit, false);
+}
+
+function onReqChange() {
+	if (req.readyState != 4 || req.status != 200) return;
+	var dom = req.responseXML;
+	var raws = dom.getElementsByTagName('rawText');
+	var raw = raws[raws.length - 1].firstChild.nodeValue;
+	//var raw = parseRaws(raws);
+	//var serializer = new XMLSerializer();
+	//var raw = serializer.serializeToString(dom);
+	result.innerHTML = '<pre>' + raw + '</pre>';
+}
+
+function onFormSubmit(e) {
+	e.preventDefault();
+	req.open('GET', URL + txtDomain.value, true);
+	req.send(null);
+	result.innerHTML = 'Processing...'
+}
+
+function parseRaws(raws) {
+	for (var i in raws) {
+		var raw = raws[i].firstChild.nodeValue;
+		if (raw.indexOf('Domain Name:') === 0) {
+			return raw;
+		}
+	}
+	// else last
+	return raws[raws.length - 1].firstChild.nodeValue;
 }
 </script>
 </head>
@@ -34,16 +82,22 @@ function onDeviceReady() {
 <body>
 <div id="wrapper">
 	<div id="welcome">
-		<h1>Welcome to HippoApp</h1>
-		<h3>Please wait...</h3>
+		<h2>Welcome to HippoApp</h2>
+		<p>Application initialization...</p>
 	</div>
-	<div id="box">
+	<div id="container">
 		<form action="" id="formSend">
 			<input type="text" id="txtDomain" value="ya.ru" />
 			<input type="submit" value="check domain" />
 		</form>
 		<div id="result"></div>
 	</div>
+</div>
+<div id="header">
+	<h1>WhoIs</h1>
+</div>
+<div id="footer">
+	<input type="button" id="btnExit" value="Exit"/>
 </div>
 </body>
 </html>

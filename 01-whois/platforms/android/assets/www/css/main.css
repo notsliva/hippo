@@ -1,0 +1,12 @@
+#formSend {
+	margin: 1em 0;
+	text-align: center;
+}
+#formSend input[type="text"] {
+	width: 30%;
+	min-width: 10em;
+}
+#formSend input[type="submit"] {
+	width: 10%;
+	min-width: 8em;
+}

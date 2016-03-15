@@ -20,19 +20,15 @@ input {
 	font-size: 100%;
 	padding: 0.5em;
 }
-.clearing {
-	clear: both;
-}
 /* core */
 #wrapper {
 	position: relative;
 	min-width: 240px;
 	min-height: 320px;
 	height: 100%;
-	overflow: auto; /* for bg */
 }
 #welcome {
-	/* display: none; */
+	display: none;
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -57,35 +53,4 @@ input {
 	width: 100%;
 	margin: 0 0 15px;
 	font-size: 14px;
-}
-/* dialpad */
-#dialpad {
-	float: left;
-	background: #a48;
-	visibility: hidden;
-	text-align: center;
-}
-#dialpad input {
-	width: 80%;
-}
-#pad {
-	margin: 1em 0 1em 0.8em;
-	background: #aaa;
-}
-#pad>div:after {
-	content: "";
-	display: block;
-	clear: both;
-}
-.btn {
-	float: left;
-	margin: 0 0.5em 0.5em 0;
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
-	border-radius: 15px;
-	background: #abc;
-}
-.btn:active {
-	background: #ccc;
 }

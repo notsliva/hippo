@@ -6,8 +6,45 @@
 <meta name="format-detection" content="telephone=no" />
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+<style>
+#dialpad {
+	float: left;
+	visibility: hidden;
+	text-align: center;
+	background: #a48;
+}
+#dialpad:after, #dialpad > div:after {
+	content: "";
+	display: block;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 0;
+	clear: both;
+}
+#dialpad > input {
+	margin: 0 0 1em;
+	width: 80%;
+}
+#dialpad > div > .btn:first-child {
+	margin-left: 0;
+}
+.btn {
+	float: left;
+	margin: 0.5em 0 0 0.5em;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 25px;
+	background: #abc;
+}
+.btn:active {
+	background: #ccc;
+}
+</style>
 <link rel="stylesheet" type="text/css" href="css/main.css" />
-<!-- <script type="text/javascript" src="cordova.js"></script> -->
+<script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/crossutil.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 </head>
@@ -19,36 +56,33 @@
 		<p>Application initialization...</p>
 	</div>
 	<div id="dialpad">
-		<input type="tel" id="txtPhone" />
-		<div id="pad">
-			<div>
-				<div class="btn">1</div>
-				<div class="btn">2</div>
-				<div class="btn">3</div>
-			</div>
-			<div>
-				<div class="btn">4</div>
-				<div class="btn">5</div>
-				<div class="btn">6</div>
-			</div>
-			<div>
-				<div class="btn">7</div>
-				<div class="btn">8</div>
-				<div class="btn">9</div>
-			</div>
-			<div>
-				<div class="btn">*</div>
-				<div class="btn" id="btnPlus">0/+</div>
-				<div class="btn">#</div>
-			</div>
-			<div>
-				<div class="btn" id="btnAdd">add</div>
-				<div class="btn">call</div>
-				<div class="btn del">del</div>
-			</div>
-		</div> <!-- end pad -->
+		<input type="tel" size="1" id="txtPhone" />
+		<div>
+			<div class="btn">1</div>
+			<div class="btn">2</div>
+			<div class="btn">3</div>
+		</div>
+		<div>
+			<div class="btn">4</div>
+			<div class="btn">5</div>
+			<div class="btn">6</div>
+		</div>
+		<div>
+			<div class="btn">7</div>
+			<div class="btn">8</div>
+			<div class="btn">9</div>
+		</div>
+		<div>
+			<div class="btn">*</div>
+			<div class="btn" id="btnPlus">0/+</div>
+			<div class="btn">#</div>
+		</div>
+		<div>
+			<div class="btn add">add</div>
+			<div class="btn call">call</div>
+			<div class="btn del">del</div>
+		</div>
 	</div> <!-- end dialpad -->
-	<div class="clearing"></div>
 </div>
 </body>
 </html>

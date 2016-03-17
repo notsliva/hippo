@@ -1,6 +1,6 @@
 ﻿var MIN_WIDTH = 240;
 var MIN_HEIGHT = 320;
-var BTN_RATIO = 0.1; // of window height
+var BTN_RATIO = 0.12; // of window height
 var dialpad, txtPhone;
 var urlMp3, tm, btnRule, btnSize, windowWidth, windowHeight;
 
@@ -27,7 +27,7 @@ function onWindowResize() {
 
 function onPadClick(e) {
 	var self = e.target;
-	//if (self.className.indexOf('btn') == -1 || self.parentNode.className.indexOf('btn') == -1) return;
+	if (self.className.indexOf('btn') == -1 && self.parentNode.className.indexOf('btn') == -1) return;
 	//
 	if (self.className.indexOf('plus') > -1) {
 		tm = setTimeout(function () {

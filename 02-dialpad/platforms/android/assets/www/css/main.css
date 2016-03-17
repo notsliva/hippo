@@ -10,15 +10,11 @@ html {
 	font: 85% Arial, Helvetica, sans-serif;
 	line-height: 1.5em;
 	color: #000;
-	background: #64a2d3;
+	background: #fff;
 }
 html, body {
 	width: 100%;
 	height: 100%;
-}
-input {
-	font-size: 100%;
-	padding: 0.5em;
 }
 /* core */
 #wrapper {
@@ -28,6 +24,7 @@ input {
 	height: 100%;
 }
 #welcome {
+	/* display: none; */
 	position: absolute;
 	left: 50%;
 	top: 50%;

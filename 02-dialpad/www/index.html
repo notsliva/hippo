@@ -9,7 +9,9 @@
 
 <style>
 #dialpad {
+	position: relative;
 	float: left;
+	height: 100%;
 	visibility: hidden;
 	text-align: center;
 	color: #02579A;
@@ -24,14 +26,32 @@
 	clear: both;
 }
 #dialpad > input {
-	margin: 0 0 1em;
-	width: 80%;
+	width: 100%;
+	height: 15%;
+	margin: 0 0 0.5em;
+	padding: 0;
+	outline: none;
+	border: 0;
+	font-size: 5vh;
+	text-align: center;
+	background: transparent;
 }
 #dialpad > div > .btn:first-child {
 	margin-left: 0;
 }
+#dialpad > div:last-child {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 15%;
+	background: #005CA9;
+}
+#dialpad > div:last-child > .btn {
+	margin-top: 0;
+}
 .btn {
 	float: left;
+	position: relative;
 	margin: 0.2em 0 0 0.2em;
 	width: 50px;
 	height: 50px;
@@ -42,14 +62,35 @@
 	font-weight: bold;
 	background: #fff;
 }
-.btn > img {
-	width: 100%;
-}
 .btn:active {
 	background: #ccc;
 }
-.add, .call, .del {
+.btn > img {
+	width: 90%;
+	margin: 5% 0 0;
+}
+.add, .del {
 	background: transparent;
+	border-color: transparent;
+}
+.call {
+	top: -27px;
+}
+#sky, #ground {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 15%;
+	z-index: -1;
+}
+#sky {
+	top: 0;
+	background: #64a2d3;
+	border-bottom: 0.3em solid #005CA9;
+}
+#ground {
+	bottom: 0;
+	background: #005CA9;
 }
 </style>
 <link rel="stylesheet" type="text/css" href="css/main.css" />
@@ -63,6 +104,8 @@
 		<h2>Welcome to HippoApp</h2>
 		<p>Application initialization...</p>
 	</div>
+	<div id="sky"></div>
+	<div id="ground"></div>
 	<div id="dialpad">
 		<input type="tel" size="1" id="txtPhone" />
 		<div>

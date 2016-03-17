@@ -1,64 +1,60 @@
 ﻿var MIN_WIDTH = 240;
 var MIN_HEIGHT = 320;
-var BTN_RATIO = 0.12; // of window height
-var URL_MP3;
-var dialpad, txtPhone, btnPlus;
-var btnRule, tm;
-var windowWidth, windowHeight, dialpadWidth, dialpadHeight, btnSize
+var BTN_RATIO = 0.1; // of window height
+var dialpad, txtPhone;
+var urlMp3, tm, btnRule, btnSize, windowWidth, windowHeight;
 
-crossutil.setEventListener(document, 'deviceready', onDeviceReady);
-// crossutil.setEventListener(window, 'load', onDeviceReady);
+// window.addEventListener('load', onDeviceReady, false);
+document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
 	btnRule = getButtonRule();
-	URL_MP3 = getMediaURL('res/btn.mp3');
+	urlMp3 = getMediaURL('res/btn.mp3');
 	dialpad = document.getElementById('dialpad');
 	txtPhone = document.getElementById('txtPhone');
-	btnPlus = document.getElementById('btnPlus');
+	document.querySelector('.plus').ontouchend = onPlusUp;
+	dialpad.addEventListener('touchstart', onPadClick, false);
 	//
-	crossutil.setEventListener(dialpad, 'touchstart', onPadClick);
-	crossutil.setEventListener(btnPlus, 'touchend', onPlusUp);
-	crossutil.setEventListener(window, 'resize', onWindowResize);
 	centering();
+	window.addEventListener('resize', onWindowResize, false);
+	window.addEventListener('orientationchange', onWindowResize, false);
 	document.getElementById('welcome').style.display = 'none';
 	dialpad.style.visibility = 'visible';
-}
+};
 
 function onWindowResize() {
-	// setTimeout(centering, 100); // autorotation fix
-	centering();
 	centering();
 }
 
 function onPadClick(e) {
 	var self = e.target;
-	if (self.className.indexOf('btn') == -1) return;
+	//if (self.className.indexOf('btn') == -1 || self.parentNode.className.indexOf('btn') == -1) return;
 	//
-	if (self.id == 'btnPlus') {
+	if (self.className.indexOf('plus') > -1) {
 		tm = setTimeout(function () {
 			clearTimeout(tm);
 			tm = null;
 			txtPhone.value += '+';
 		}, 1000);
 	}
-	else if (self.className.indexOf('add') > -1) {
+	// img
+	else if (self.parentNode.className.indexOf('add') > -1) {
 		if (txtPhone.value == '') return;
 		var dspName = prompt('Enter some name', '');
-		if ( !dspName || !crossutil.trim(dspName, ' ') ) return;
+		if ( !dspName || !trim(dspName, ' ') ) return;
 		addContact(dspName, txtPhone.value);
 	}
-	else if (self.className.indexOf('call') > -1) {
+	else if (self.parentNode.className.indexOf('call') > -1) {
 		//
 	}
-	else if (self.className.indexOf('del') > -1) {
+	else if (self.parentNode.className.indexOf('del') > -1) {
 		var str = txtPhone.value;
 		txtPhone.value = str.substring(0, str.length - 1);
 	}
 	else {
-		//var num = parseInt(self.innerHTML);
 		txtPhone.value += self.innerHTML;
 	}
 	//
-	playAudio(URL_MP3);
+	playAudio(urlMp3);
 }
 
 function onPlusUp() {
@@ -120,22 +116,18 @@ function playAudio(url) {
 }
 
 function centering() {
-	windowWidth = document.body.clientWidth;
-	windowHeight = document.body.clientHeight;
-	
-	//if (windowWidth > MIN_WIDTH && windowHeight > MIN_HEIGHT) {
-	{
-		btnSize = BTN_RATIO * windowHeight;
-		btnRule.style.width = btnSize + 'px';
-		btnRule.style.height = btnSize + 'px';
-		btnRule.style.lineHeight = btnSize + 'px';
-		btnRule.style.borderRadius = btnSize / 2 + 'px';
-		//
-		dialpadWidth = parseInt( crossutil.getStyle(dialpad, 'width') );
-		dialpadHeight = parseInt( crossutil.getStyle(dialpad, 'height') );
-		dialpad.style.marginLeft = (windowWidth - dialpadWidth) / 2 + 'px';
-		dialpad.style.marginTop = (windowHeight - dialpadHeight) / 2 + 'px';
-	}
+	windowWidth = document.documentElement.clientWidth;
+	windowHeight = document.documentElement.clientHeight;
+	if (windowWidth <= MIN_WIDTH) windowWidth = MIN_WIDTH;
+	if (windowHeight <= MIN_HEIGHT) windowHeight = MIN_HEIGHT;
+	//
+	btnSize = BTN_RATIO * windowHeight;
+	btnRule.style.width = btnSize + 'px';
+	btnRule.style.height = btnSize + 'px';
+	btnRule.style.lineHeight = btnSize + 'px';
+	btnRule.style.borderRadius = btnSize / 2 + 'px';
+	dialpad.style.marginLeft = (windowWidth - dialpad.clientWidth) / 2 + 'px';
+	dialpad.style.marginTop = (windowHeight - dialpad.clientHeight) / 2 + 'px';
 }
 
 function getButtonRule() {
@@ -149,4 +141,10 @@ function getButtonRule() {
 	}
 	catch (err) {}
 	return null;
+}
+
+function trim(str, charlist) {
+	charlist = !charlist ? ' \s\xA0' : charlist.replace(/([\[\]\(\)\.\?\/\*\{\}\+\$\^\:])/g, '\$1');
+	var re = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+	return str.replace(re, '');
 }

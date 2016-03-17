@@ -29,13 +29,7 @@ function onReqReady() {
 }
 
 function onFormSubmit(e) {
-	e = e || event;
-	try {
-		e.preventDefault(); // w3c dom
-	}
-	catch (err) {
-		e.returnValue = false; // IE
-	}
+	e.preventDefault();
 	req.open('GET', URL + txtDomain.value, true);
 	req.send(null);
 	result.innerHTML = 'Processing...'

@@ -4,8 +4,8 @@ var BTN_RATIO = 0.12; // of window height
 var dialpad, txtPhone;
 var urlMp3, tm, btnRule, btnSize, windowWidth, windowHeight;
 
-// window.addEventListener('load', onDeviceReady, false);
-document.addEventListener('deviceready', onDeviceReady, false);
+window.addEventListener('load', onDeviceReady, false);
+// document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
 	btnRule = getButtonRule();
 	urlMp3 = getMediaURL('res/btn.mp3');
@@ -116,7 +116,7 @@ function playAudio(url) {
 }
 
 function centering() {
-	windowWidth = document.documentElement.clientWidth;
+	//windowWidth = document.documentElement.clientWidth;
 	windowHeight = document.documentElement.clientHeight;
 	if (windowWidth <= MIN_WIDTH) windowWidth = MIN_WIDTH;
 	if (windowHeight <= MIN_HEIGHT) windowHeight = MIN_HEIGHT;
@@ -126,8 +126,8 @@ function centering() {
 	btnRule.style.height = btnSize + 'px';
 	btnRule.style.lineHeight = btnSize + 'px';
 	btnRule.style.borderRadius = btnSize / 2 + 'px';
-	dialpad.style.marginLeft = (windowWidth - dialpad.clientWidth) / 2 + 'px';
-	dialpad.style.marginTop = (windowHeight - dialpad.clientHeight) / 2 + 'px';
+	//dialpad.style.marginLeft = (windowWidth - dialpad.clientWidth) / 2 + 'px';
+	//dialpad.style.marginTop = (windowHeight - dialpad.clientHeight) / 2 + 'px';
 }
 
 function getButtonRule() {

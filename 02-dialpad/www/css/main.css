@@ -12,8 +12,7 @@ html {
 	color: #000;
 	background: #fff;
 }
-html, body {
-	width: 100%;
+html, body, #wrapper, #dialpad {
 	height: 100%;
 }
 /* core */
@@ -21,7 +20,7 @@ html, body {
 	position: relative;
 	min-width: 240px;
 	min-height: 320px;
-	height: 100%;
+	text-align: center;
 }
 #welcome {
 	/* display: none; */

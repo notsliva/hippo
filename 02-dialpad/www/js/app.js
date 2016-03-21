@@ -1,24 +1,25 @@
 ﻿var MIN_WIDTH = 240;
 var MIN_HEIGHT = 320;
-var BTN_RATIO = 0.12; // of window height
-var dialpad, txtPhone;
-var urlMp3, tm, btnRule, btnSize, windowWidth, windowHeight;
+var BTN_RATIO = 0.113; // of window height
+var dialpad, txtPhone, btnCall;
+var urlMp3, tm, buttonRule, buttonSize, windowHeight;
 
-window.addEventListener('load', onDeviceReady, false);
-// document.addEventListener('deviceready', onDeviceReady, false);
+// window.addEventListener('load', onDeviceReady, false);
+document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
-	btnRule = getButtonRule();
+	buttonRule = getButtonRule();
 	urlMp3 = getMediaURL('res/btn.mp3');
 	dialpad = document.getElementById('dialpad');
 	txtPhone = document.getElementById('txtPhone');
+	btnCall = document.querySelector('.call');
 	document.querySelector('.plus').ontouchend = onPlusUp;
 	dialpad.addEventListener('touchstart', onPadClick, false);
 	//
 	centering();
 	window.addEventListener('resize', onWindowResize, false);
-	window.addEventListener('orientationchange', onWindowResize, false);
+	// window.addEventListener('orientationchange', onWindowResize, false); // autorotation fix
 	document.getElementById('welcome').style.display = 'none';
-	dialpad.style.visibility = 'visible';
+	document.getElementById('container').style.visibility = 'visible';
 };
 
 function onWindowResize() {
@@ -116,23 +117,22 @@ function playAudio(url) {
 }
 
 function centering() {
-	//windowWidth = document.documentElement.clientWidth;
 	windowHeight = document.documentElement.clientHeight;
-	if (windowWidth <= MIN_WIDTH) windowWidth = MIN_WIDTH;
 	if (windowHeight <= MIN_HEIGHT) windowHeight = MIN_HEIGHT;
 	//
-	btnSize = BTN_RATIO * windowHeight;
-	btnRule.style.width = btnSize + 'px';
-	btnRule.style.height = btnSize + 'px';
-	btnRule.style.lineHeight = btnSize + 'px';
-	btnRule.style.borderRadius = btnSize / 2 + 'px';
-	//dialpad.style.marginLeft = (windowWidth - dialpad.clientWidth) / 2 + 'px';
-	//dialpad.style.marginTop = (windowHeight - dialpad.clientHeight) / 2 + 'px';
+	buttonSize = BTN_RATIO * windowHeight;
+	buttonRule.style.width = buttonSize + 'px';
+	buttonRule.style.height = buttonSize + 'px';
+	buttonRule.style.lineHeight = buttonSize + 'px';
+	buttonRule.style.borderRadius = buttonSize / 2 + 'px';
+	btnCall.style.top = -(buttonSize / 2 + 2) + 'px'; // +2 for border
+	// html font size
+	document.documentElement.style.fontSize = windowHeight / MIN_HEIGHT * 100 + '%';
 }
 
 function getButtonRule() {
 	try {
-		var rules = document.styleSheets[0].cssRules;
+		var rules = document.styleSheets[1].cssRules;
 		for (var i in rules) {
 			if (rules[i].selectorText == '.btn') {
 				return rules[i];

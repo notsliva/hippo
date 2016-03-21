@@ -7,104 +7,18 @@
 <meta name="msapplication-tap-highlight" content="no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 
-<style>
-#sky, #ground {
-	position: absolute;
-	left: 0;
-	width: 100%;
-	height: 15%;
-	z-index: -1;
-}
-#sky {
-	top: 0;
-	background: #64a2d3;
-	border-bottom: 0.3em solid #005CA9;
-}
-#ground {
-	bottom: 0;
-	background: #005CA9;
-}
-/* center block */
-#dialpad {
-	position: relative;
-	display: inline-block;
-	visibility: hidden;
-	font-size: 150%;
-	color: #02579A;
-}
-#dialpad:after, #dialpad > div:after {
-	content: "";
-	display: block;
-	height: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 0;
-	clear: both;
-}
-#dialpad > input {
-	width: 100%;
-	height: 15%;
-	margin: 0 0 0.5em;
-	padding: 0;
-	outline: none;
-	border: 0;
-	font-size: 100%;
-	text-align: center;
-	color: #fff;
-	background: transparent;
-}
-#dialpad > div > .btn:first-child {
-	margin-left: 0;
-}
-.spacer {
-	padding: 0 0 20%;
-}
-#dialpad > div:last-child {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	height: 15%;
-	background: #005CA9;
-}
-#dialpad > div:last-child > .btn {
-	margin-top: 0;
-}
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<style type="text/css">
 .btn {
 	float: left;
-	position: relative;
-	margin: 0.2em 0 0 0.3em;
+	margin: 0.3em 0 0 0.3em;
 	width: 36px;
 	height: 36px;
 	line-height: 36px;
 	border-radius: 18px;
 	border: 2px solid #6B92BB;
-	font-size: 100%;
 	font-weight: bold;
 	background: #fff;
-}
-.btn:active {
-	background: #ccc;
-}
-.btn > img {
-	width: 90%;
-	margin: 5% 0 0;
-}
-.plus {
-	line-height: 10%;
-}
-.plus span {
-	font-size: 50%;
-}
-.plus span:first-child {
-	line-height: 130%;
-	font-size: 100%;
-}
-.add, .del {
-	background: transparent;
-	border-color: transparent;
-}
-.call {
-	top: -27px;
 }
 </style>
 <link rel="stylesheet" type="text/css" href="css/main.css" />
@@ -118,37 +32,38 @@
 		<h2>Welcome to HippoApp</h2>
 		<p>Application initialization...</p>
 	</div>
-	<div id="sky"></div>
-	<div id="ground"></div>
-	<div id="dialpad">
-		<input type="tel" size="1" id="txtPhone" value="012" />
-		<div>
-			<div class="btn">1</div>
-			<div class="btn">2</div>
-			<div class="btn">3</div>
-		</div>
-		<div>
-			<div class="btn">4</div>
-			<div class="btn">5</div>
-			<div class="btn">6</div>
-		</div>
-		<div>
-			<div class="btn">7</div>
-			<div class="btn">8</div>
-			<div class="btn">9</div>
-		</div>
-		<div>
-			<div class="btn">*</div>
-			<div class="btn plus"><span>0</span><br /><span>+</span></div>
-			<div class="btn">#</div>
-		</div>
-		<div class="spacer"></div>
-		<div>
-			<div class="btn add"><img src="img/add.png" alt="" /></div>
-			<div class="btn call"><img src="img/call.png" alt="" /></div>
-			<div class="btn del"><img src="img/del.png" alt="" /></div>
-		</div>
-	</div> <!-- end dialpad -->
+	<div id="container">
+		<div id="sky"></div>
+		<div id="ground"></div>
+		<div id="dialpad">
+			<input type="tel" size="1" id="txtPhone" value="" />
+			<div>
+				<div class="btn">1</div>
+				<div class="btn">2</div>
+				<div class="btn">3</div>
+			</div>
+			<div>
+				<div class="btn">4</div>
+				<div class="btn">5</div>
+				<div class="btn">6</div>
+			</div>
+			<div>
+				<div class="btn">7</div>
+				<div class="btn">8</div>
+				<div class="btn">9</div>
+			</div>
+			<div>
+				<div class="btn">*</div>
+				<div class="btn plus">0<br /><span>+</span></div>
+				<div class="btn">#</div>
+			</div>
+			<div>
+				<div class="btn add"><img src="img/add.png" alt="" /></div>
+				<div class="btn call"><img src="img/call.png" alt="" /></div>
+				<div class="btn del"><img src="img/del.png" alt="" /></div>
+			</div>
+		</div> <!-- dialpad end -->
+	</div> <!-- container end -->
 </div>
 </body>
 </html>

@@ -1,6 +1,5 @@
-﻿var MIN_WIDTH = 240;
-var MIN_HEIGHT = 320;
-var BTN_RATIO = 0.113; // of window height
+﻿var MIN_HEIGHT = 320;
+var BUTTON_RATIO = 0.113; // of window height
 var dialpad, txtPhone, btnCall;
 var urlMp3, tm, buttonRule, buttonSize, windowHeight;
 
@@ -26,33 +25,43 @@ function onWindowResize() {
 	centering();
 }
 
+function isContains(element, selector) {
+	var class1 = element.className.toLowerCase();
+	var class2 = element.parentNode.className.toLowerCase();
+	selector = selector.toLowerCase();
+	if (class1.indexOf(selector) > -1 || class2.indexOf(selector) > -1) return true;
+	return false;
+}
+
 function onPadClick(e) {
-	var self = e.target;
-	if (self.className.indexOf('btn') == -1 && self.parentNode.className.indexOf('btn') == -1) return;
-	//
-	if (self.className.indexOf('plus') > -1) {
+	if ( !isContains(e.target, 'btn') ) return;
+	// PLUS (div & span)
+	if ( isContains(e.target, 'plus') ) {
 		tm = setTimeout(function () {
 			clearTimeout(tm);
 			tm = null;
 			txtPhone.value += '+';
 		}, 1000);
 	}
-	// img
-	else if (self.parentNode.className.indexOf('add') > -1) {
+	// ADD (div & img)
+	else if ( isContains(e.target, 'add') ) {
 		if (txtPhone.value == '') return;
 		var dspName = prompt('Enter some name', '');
 		if ( !dspName || !trim(dspName, ' ') ) return;
 		addContact(dspName, txtPhone.value);
 	}
-	else if (self.parentNode.className.indexOf('call') > -1) {
+	// CALL (div & img)
+	else if ( isContains(e.target, 'call') ) {
 		//
 	}
-	else if (self.parentNode.className.indexOf('del') > -1) {
+	// DEL (div & img)
+	else if ( isContains(e.target, 'del') ) {
 		var str = txtPhone.value;
 		txtPhone.value = str.substring(0, str.length - 1);
 	}
+	// NUMS (div)
 	else {
-		txtPhone.value += self.innerHTML;
+		txtPhone.value += e.target.innerHTML;
 	}
 	//
 	playAudio(urlMp3);
@@ -81,9 +90,7 @@ function addContact(name, phone) {
 			}
 		);
 	}
-	catch (err) {
-		console.log(err);
-	}
+	catch (err) {}
 }
 
 function getMediaURL(url) {
@@ -92,9 +99,7 @@ function getMediaURL(url) {
 			return '/android_asset/www/' + url;
 		}
 	}
-	catch (err) {
-		console.log(err);
-	}
+	catch (err) {}
 	return url;
 }
 
@@ -105,27 +110,23 @@ function playAudio(url) {
 			function () {
 				myMedia.release();
 			},
-			function (err) {
-				console.log(err);
-			}
+			function (err) {}
 		);
 		myMedia.play();
 	}
-	catch (err) {
-		console.log(err);
-	}
+	catch (err) {}
 }
 
 function centering() {
 	windowHeight = document.documentElement.clientHeight;
-	if (windowHeight <= MIN_HEIGHT) windowHeight = MIN_HEIGHT;
+	if (windowHeight < MIN_HEIGHT) windowHeight = MIN_HEIGHT;
 	//
-	buttonSize = BTN_RATIO * windowHeight;
+	buttonSize = BUTTON_RATIO * windowHeight;
 	buttonRule.style.width = buttonSize + 'px';
 	buttonRule.style.height = buttonSize + 'px';
 	buttonRule.style.lineHeight = buttonSize + 'px';
-	buttonRule.style.borderRadius = buttonSize / 2 + 'px';
-	btnCall.style.top = -(buttonSize / 2 + 2) + 'px'; // +2 for border
+	buttonRule.style.borderRadius = parseInt(buttonSize / 2) + 'px';
+	btnCall.style.top = -( buttonSize / 2 + parseInt(buttonRule.style.borderWidth) ) + 'px';
 	// html font size
 	document.documentElement.style.fontSize = windowHeight / MIN_HEIGHT * 100 + '%';
 }

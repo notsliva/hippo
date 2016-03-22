@@ -8,7 +8,14 @@ document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
 	buttonRule = getButtonRule();
 	urlMp3 = getMediaURL('res/btn.wav');
-	new Media(urlMp3).play();
+	
+	try {
+		new Media(urlMp3).play();
+	}
+	catch (e) {
+		alert(e);
+	}
+	
 	dialpad = document.getElementById('dialpad');
 	txtPhone = document.getElementById('txtPhone');
 	btnCall = document.querySelector('.call');
@@ -98,7 +105,8 @@ function addContact(name, phone) {
 function getMediaURL(url) {
 	var path = location.pathname;
 	path = path.substring(path, path.length - 10); // del index.html
-	return 'file://' + path + url;
+	return path + url;
+	// return 'file://' + path + url;
 	
 	/*try {
 		if (device.platform.toLowerCase() == 'android') {

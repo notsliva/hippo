@@ -7,8 +7,8 @@ var urlMp3, tm, buttonRule, buttonSize, windowHeight;
 document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
 	buttonRule = getButtonRule();
-	//urlMp3 = getMediaURL('res/btn.wav');
-	urlMp3 = 'res/btn.wav';
+	urlMp3 = getMediaURL('res/btn.wav');
+	alert(urlMp3);
 	dialpad = document.getElementById('dialpad');
 	txtPhone = document.getElementById('txtPhone');
 	btnCall = document.querySelector('.call');
@@ -65,7 +65,8 @@ function onPadClick(e) {
 		txtPhone.value += self.innerHTML;
 	}
 	//
-	playAudio(urlMp3);
+	//playAudio(urlMp3);
+	new Media(urlMp3).play();
 }
 
 function onPlusUp() {

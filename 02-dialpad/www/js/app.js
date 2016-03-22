@@ -7,7 +7,8 @@ var urlMp3, tm, buttonRule, buttonSize, windowHeight;
 document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
 	buttonRule = getButtonRule();
-	urlMp3 = getMediaURL('res/btn.wav');
+	//urlMp3 = getMediaURL('res/btn.wav');
+	urlMp3 = 'res/btn.wav';
 	dialpad = document.getElementById('dialpad');
 	txtPhone = document.getElementById('txtPhone');
 	btnCall = document.querySelector('.call');
@@ -16,7 +17,6 @@ function onDeviceReady() {
 	//
 	centering();
 	window.addEventListener('resize', onWindowResize, false);
-	// window.addEventListener('orientationchange', onWindowResize, false); // autorotation fix
 	document.getElementById('welcome').style.display = 'none';
 	document.getElementById('container').style.visibility = 'visible';
 };
@@ -34,9 +34,10 @@ function isContains(element, selector) {
 }
 
 function onPadClick(e) {
-	if ( !isContains(e.target, 'btn') ) return;
+	var self = e.target;
+	if ( !isContains(self, 'btn') ) return;
 	// PLUS (div & span)
-	if ( isContains(e.target, 'plus') ) {
+	if ( isContains(self, 'plus') ) {
 		tm = setTimeout(function () {
 			clearTimeout(tm);
 			tm = null;
@@ -44,24 +45,24 @@ function onPadClick(e) {
 		}, 1000);
 	}
 	// ADD (div & img)
-	else if ( isContains(e.target, 'add') ) {
+	else if ( isContains(self, 'add') ) {
 		if (txtPhone.value == '') return;
 		var dspName = prompt('Enter some name', '');
 		if ( !dspName || !trim(dspName, ' ') ) return;
 		addContact(dspName, txtPhone.value);
 	}
 	// CALL (div & img)
-	else if ( isContains(e.target, 'call') ) {
+	else if ( isContains(self, 'call') ) {
 		//
 	}
 	// DEL (div & img)
-	else if ( isContains(e.target, 'del') ) {
+	else if ( isContains(self, 'del') ) {
 		var str = txtPhone.value;
 		txtPhone.value = str.substring(0, str.length - 1);
 	}
 	// NUMS (div)
 	else {
-		txtPhone.value += e.target.innerHTML;
+		txtPhone.value += self.innerHTML;
 	}
 	//
 	playAudio(urlMp3);
@@ -95,7 +96,7 @@ function addContact(name, phone) {
 
 function getMediaURL(url) {
 	var path = location.pathname;
-	path = path.substr( path, path.length - 10 ); // - index.html
+	path = path.substring(path, path.length - 10); // del index.html
 	return 'file://' + path + url;
 	
 	/*try {
@@ -116,7 +117,7 @@ function playAudio(url) {
 			},
 			function (err) {}
 		);
-		myMedia.play();
+		myMedia.play({numberOfLoops: 1});
 	}
 	catch (err) {}
 }

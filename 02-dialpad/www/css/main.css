@@ -81,6 +81,7 @@ html, body, #wrapper, #container, #dialpad {
 	color: #02579A;
 }
 #dialpad > input {
+	display: block; /* height fix */
 	width: 140%;
 	margin: 0 -20% 0.4em;
 	border: 0;

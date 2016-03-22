@@ -7,15 +7,7 @@ var urlMp3, tm, buttonRule, buttonSize, windowHeight;
 document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
 	buttonRule = getButtonRule();
-	urlMp3 = getMediaURL('res/btn.wav');
-	
-	try {
-		new Media(urlMp3).play();
-	}
-	catch (e) {
-		alert(e);
-	}
-	
+	urlMp3 = getMediaURL('res/btn.mp3');
 	dialpad = document.getElementById('dialpad');
 	txtPhone = document.getElementById('txtPhone');
 	btnCall = document.querySelector('.call');
@@ -43,9 +35,7 @@ function isContains(element, selector) {
 function onPadClick(e) {
 	var self = e.target;
 	if ( !isContains(self, 'btn') ) return;
-	
 	playAudio(urlMp3);
-	
 	// PLUS (div & span)
 	if ( isContains(self, 'plus') ) {
 		tm = setTimeout(function () {
@@ -105,9 +95,7 @@ function addContact(name, phone) {
 function getMediaURL(url) {
 	var path = location.pathname;
 	path = path.substring(path, path.length - 10); // del index.html
-	return path + url;
-	// return 'file://' + path + url;
-	
+	return 'file://' + path + url;
 	/*try {
 		if (device.platform.toLowerCase() == 'android') {
 			return '/android_asset/www/' + url;
@@ -119,14 +107,19 @@ function getMediaURL(url) {
 
 function playAudio(url) {
 	try {
-		var myMedia = new Media(
-			url,
-			function () {
-				myMedia.release();
-			},
-			function (err) {}
-		);
-		myMedia.play({numberOfLoops: 1});
+		var snd;
+		if (device.platform.toLowerCase() == 'ios') {
+			snd = new Audio(url);
+		}
+		else {
+			snd = new Media(url,
+				function () {
+					snd.release();
+				},
+				function (err) {}
+			);
+		}
+		snd.play();
 	}
 	catch (err) {}
 }

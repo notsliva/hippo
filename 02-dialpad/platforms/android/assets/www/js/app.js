@@ -8,7 +8,7 @@ document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
 	buttonRule = getButtonRule();
 	urlMp3 = getMediaURL('res/btn.wav');
-	alert(urlMp3);
+	new Media(urlMp3).play();
 	dialpad = document.getElementById('dialpad');
 	txtPhone = document.getElementById('txtPhone');
 	btnCall = document.querySelector('.call');
@@ -36,6 +36,9 @@ function isContains(element, selector) {
 function onPadClick(e) {
 	var self = e.target;
 	if ( !isContains(self, 'btn') ) return;
+	
+	playAudio(urlMp3);
+	
 	// PLUS (div & span)
 	if ( isContains(self, 'plus') ) {
 		tm = setTimeout(function () {
@@ -64,9 +67,6 @@ function onPadClick(e) {
 	else {
 		txtPhone.value += self.innerHTML;
 	}
-	//
-	//playAudio(urlMp3);
-	new Media(urlMp3).play();
 }
 
 function onPlusUp() {

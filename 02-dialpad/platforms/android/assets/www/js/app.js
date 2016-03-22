@@ -7,7 +7,7 @@ var urlMp3, tm, buttonRule, buttonSize, windowHeight;
 document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
 	buttonRule = getButtonRule();
-	urlMp3 = getMediaURL('res/btn.mp3');
+	urlMp3 = getMediaURL('res/btn.wav');
 	dialpad = document.getElementById('dialpad');
 	txtPhone = document.getElementById('txtPhone');
 	btnCall = document.querySelector('.call');

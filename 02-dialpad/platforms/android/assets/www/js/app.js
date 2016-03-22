@@ -94,13 +94,17 @@ function addContact(name, phone) {
 }
 
 function getMediaURL(url) {
-	try {
+	var path = location.pathname;
+	path = path.substr( path, path.length - 10 ); // - index.html
+	return 'file://' + path + url;
+	
+	/*try {
 		if (device.platform.toLowerCase() == 'android') {
 			return '/android_asset/www/' + url;
 		}
 	}
 	catch (err) {}
-	return url;
+	return url;*/
 }
 
 function playAudio(url) {

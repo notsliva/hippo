@@ -2,17 +2,16 @@
 var pageNum = 0;
 var wrapper;
 
-window.addEventListener('load', onDeviceReady, false);
-// document.addEventListener('deviceready', onDeviceReady, false);
+// window.addEventListener('load', onDeviceReady, false);
+document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
-	wrapper = document.getElementById('wrapper')
+	wrapper = document.getElementById('wrapper');
 	// wrapper.addEventListener('click', onWrapperClick, false);
 	wrapper.addEventListener('touchstart', onWrapperClick, false);
-};
+}
 
 function onWrapperClick(e) {
 	var self = e.target.tagName.toLowerCase();
-	console.log(self);
 	if (self == 'button') {
 		next();
 	}

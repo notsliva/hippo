@@ -17,7 +17,7 @@ function onDeviceReady() {
 	centering();
 	window.addEventListener('resize', onWindowResize, false);
 	document.getElementById('welcome').style.display = 'none';
-	document.getElementById('container').style.visibility = 'visible';
+	document.getElementById('container').style.display = 'block';
 };
 
 function onWindowResize() {

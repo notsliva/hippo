@@ -1,0 +1,123 @@
+﻿* {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+html {
+	-webkit-touch-callout: none;
+	-webkit-text-size-adjust: none;
+	-webkit-user-select: none;
+	font: 100% Arial, Helvetica, sans-serif;
+	color: #000;
+	background: #fff;
+}
+html, body, #wrapper {
+	height: 100%;
+}
+#wrapper {
+	position: relative;
+	min-width: 240px;
+	min-height: 320px;
+}
+h1 {
+	margin: 0 0 0.5em;
+	padding: 0.5em 0;
+	font-size: 1.5em;
+	font-weight: bold;
+	text-align: center;
+	color: #25f;
+	background: #def;
+}
+h1:active {
+	background: #eef;
+}
+/* controls */
+input, button {
+	padding: 0.5em;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+	outline: 0;
+	font-size: 1em;
+	color: #000;
+}
+input {
+	background: #fff;
+}
+button {
+	background: #ddd;
+}
+button:active {
+	background: #ccc;
+}
+/* login */
+#page0 {
+	/* display: none; */
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 230px;
+	height: 310px;
+	margin: -155px 0 0 -115px;
+	overflow: hidden;
+	text-align: center;
+	background: url(../img/logo.jpg) no-repeat 50% 0;
+}
+#page0 > div {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+#page0 > div > div {
+	margin: 0.7em 0 0;
+}
+#page0 input {
+	width: 70%;
+	text-align: center;
+}
+#page0 button {
+	width: 78%;
+}
+/* pages */
+.content {
+	padding: 0.5em;
+}
+.content > ul {
+	margin: 1em 2em;
+	text-align: center;
+}
+.content > ul > li {
+	margin: 0.5em 0;
+}
+.content > ul button {
+	width: 100%;
+	max-width: 200px;
+}
+#page1 {
+	display: none;
+}
+#page2 {
+	display: none;
+}
+#page3 {
+	display: none;
+}
+#page3 .content {
+	text-align: center;
+}
+#page3 .content > div {
+	margin: 1em 0;
+}
+#page3 .content > div > input {
+	width: 90%;
+}
+#page3 .content > div > button {
+	width: 30%;
+}
+#page3 .content > div > button:first-child {
+	margin-right: 2em;
+}
+@media (min-width: 330px) {
+	#page3 .content {
+		width: 300px;
+		margin: 1em auto;
+	}
+}

@@ -27,7 +27,7 @@ html, body, #wrapper, #container, #dialpad {
 	position: relative;
 }
 #container {
-	visibility: hidden;
+	display: none;
 }
 #welcome {
 	/* display: none; */

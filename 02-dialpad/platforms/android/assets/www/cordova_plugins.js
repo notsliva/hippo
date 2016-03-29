@@ -239,6 +239,14 @@ module.exports = [
         "clobbers": [
             "window.Media"
         ]
+    },
+    {
+        "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
+        "id": "ionic-plugin-keyboard.keyboard",
+        "clobbers": [
+            "cordova.plugins.Keyboard"
+        ],
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -248,7 +256,8 @@ module.exports.metadata =
     "cordova-plugin-contacts": "2.0.1",
     "cordova-plugin-device": "1.1.1",
     "cordova-plugin-file": "4.1.1",
-    "cordova-plugin-media": "2.2.1-dev"
+    "cordova-plugin-media": "2.2.1-dev",
+    "ionic-plugin-keyboard": "2.0.1"
 };
 // BOTTOM OF METADATA
 });

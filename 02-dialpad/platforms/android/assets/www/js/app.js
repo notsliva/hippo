@@ -10,14 +10,20 @@ function onDeviceReady() {
 	urlMp3 = getMediaURL('res/btn.mp3');
 	dialpad = document.getElementById('dialpad');
 	txtPhone = document.getElementById('txtPhone');
+	
+	/*window.addEventListener('native.keyboardshow', keyboardShowHandler);
+	function keyboardShowHandler(e) {
+		cordova.plugins.Keyboard.close();
+	}*/
+	
 	btnCall = document.querySelector('.call');
-	document.querySelector('.plus').ontouchend = onPlusUp;
 	dialpad.addEventListener('touchstart', onPadClick, false);
+	dialpad.addEventListener('touchend', onPadUp, false);
 	//
 	centering();
 	window.addEventListener('resize', onWindowResize, false);
 	document.getElementById('welcome').style.display = 'none';
-	document.getElementById('container').style.visibility = 'visible';
+	document.getElementById('container').style.display = 'block';
 };
 
 function onWindowResize() {
@@ -57,8 +63,11 @@ function onPadClick(e) {
 	}
 	// DEL (div & img)
 	else if ( isContains(self, 'del') ) {
-		var str = txtPhone.value;
-		txtPhone.value = str.substring(0, str.length - 1);
+		tm = setTimeout(function () {
+			clearTimeout(tm);
+			tm = null;
+			txtPhone.value = '';
+		}, 1000);
 	}
 	// NUMS (div)
 	else {
@@ -66,12 +75,20 @@ function onPadClick(e) {
 	}
 }
 
-function onPlusUp() {
-	if (tm) {
-		clearTimeout(tm);
-		tm = null;
+function onPadUp(e) {
+	if (!tm) return;
+	var self = e.target;
+	// PLUS (div & span)
+	if ( isContains(self, 'plus') ) {
 		txtPhone.value += '0';
 	}
+	// DEL (div & img)
+	else if ( isContains(self, 'del') ) {
+		var str = txtPhone.value;
+		txtPhone.value = str.substring(0, str.length - 1);
+	}
+	clearTimeout(tm);
+	tm = null;
 }
 
 function addContact(name, phone) {

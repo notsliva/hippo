@@ -27,6 +27,10 @@
                         {
                             "xml": "<feature name=\"Media\"><param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"io.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -81,6 +85,9 @@
             "PACKAGE_NAME": "net.disup.dialpad"
         },
         "cordova-plugin-media": {
+            "PACKAGE_NAME": "net.disup.dialpad"
+        },
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "net.disup.dialpad"
         }
     },
@@ -325,6 +332,14 @@
             "clobbers": [
                 "window.Media"
             ]
+        },
+        {
+            "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
+            "id": "ionic-plugin-keyboard.keyboard",
+            "clobbers": [
+                "cordova.plugins.Keyboard"
+            ],
+            "runs": true
         }
     ],
     "plugin_metadata": {
@@ -332,6 +347,7 @@
         "cordova-plugin-contacts": "2.0.1",
         "cordova-plugin-device": "1.1.1",
         "cordova-plugin-file": "4.1.1",
-        "cordova-plugin-media": "2.2.1-dev"
+        "cordova-plugin-media": "2.2.1-dev",
+        "ionic-plugin-keyboard": "2.0.1"
     }
 }

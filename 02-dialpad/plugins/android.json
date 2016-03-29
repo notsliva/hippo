@@ -18,6 +18,9 @@
         },
         "cordova-plugin-media": {
             "PACKAGE_NAME": "net.disup.dialpad"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "net.disup.dialpad"
         }
     },
     "dependent_plugins": {
